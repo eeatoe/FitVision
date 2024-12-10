@@ -1,0 +1,192 @@
+{
+  "main": {
+    "id": "8e02b457fbd7c542",
+    "type": "split",
+    "children": [
+      {
+        "id": "f97cbf950fa04fd1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d8553a052a64b7e8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1294bb1f21afadbf",
+    "type": "split",
+    "children": [
+      {
+        "id": "3d0c551f38c7875b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "39c0454499a54f38",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Файловый менеджер"
+            }
+          },
+          {
+            "id": "3619fb83f9e12f83",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Поиск"
+            }
+          },
+          {
+            "id": "ea91e44a37348d12",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Закладки"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "56e5ae93f5653277",
+    "type": "split",
+    "children": [
+      {
+        "id": "aa0ef87055e21772",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "963f7dcda17ad3a2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Обратные ссылки для README"
+            }
+          },
+          {
+            "id": "8fa372fee0fae4ae",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Исходящие ссылки из README"
+            }
+          },
+          {
+            "id": "1f953fcc6b98ffdc",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Теги"
+            }
+          },
+          {
+            "id": "97a6811257a7a24f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "README.md"
+              },
+              "icon": "lucide-list",
+              "title": "Структура README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false
+    }
+  },
+  "active": "d8553a052a64b7e8",
+  "lastOpenFiles": [
+    "dataset/processed/correct/20241122_130306_segment_53.mp4",
+    "dataset/processed/correct/20241122_130306_segment_52.mp4",
+    "dataset/processed/correct/20241122_130306_segment_51.mp4",
+    "dataset/processed/correct/20241122_130306_segment_50.mp4",
+    "dataset/processed/correct/20241122_130306_segment_49.mp4",
+    "dataset/processed/correct/20241122_130306_segment_48.mp4",
+    "dataset/processed/correct/20241122_130306_segment_47.mp4",
+    "dataset/processed/correct/20241122_130306_segment_46.mp4",
+    "dataset/processed/correct/20241122_130306_segment_45.mp4",
+    "dataset/processed/correct/20241122_130306_segment_44.mp4",
+    "dataset/processed/correct/20241122_130306_segment_43.mp4",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/images/zoom_to_rect_large.png",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/images/zoom_to_rect.svg",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/images/zoom_to_rect.png",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/images/subplots_large.png",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/images/subplots.svg",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/images/subplots.png",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/images/qt4_editor_options_large.png",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/images/qt4_editor_options.svg",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/images/qt4_editor_options.png",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/images/move_large.png",
+    "venv/lib/python3.12/site-packages/scipy/fft/_pocketfft/LICENSE.md",
+    "venv/lib/python3.12/site-packages/~umpy/random/LICENSE.md",
+    "dataset/README.md"
+  ]
+}

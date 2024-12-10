@@ -1,0 +1,11 @@
+# Папка с локальным окружением
+venv/
+
+# Папка с обученными моделаям (может быть в будующем кинем в репозиторий)
+outputs/
+
+# Базы данных
+dataset/poses
+dataset/processed
+dataset/raw
+dataset/metadata.csv
