@@ -1,23 +1,31 @@
-from model import SquatModel
+from dataProcessing import load_data, preprocess_data
+from model import MLPModel, train_model
 import torch
+import torch.nn as nn
+import torch.optim as optim
 
-# Загрузим модель
-model = SquatModel()
-model.load_state_dict(torch.load("squat_model.pth"))
-model.eval()
+def main():
+    # Загрузка данных
+    json_file_path = 'pose_data.json'
+    features, labels = load_data(json_file_path)
 
-# Функция для предсказания на новом кадре
-def predict(input_data):
-    input_tensor = torch.tensor(input_data).unsqueeze(0)  # Преобразуем данные в тензор
-    output = model(input_tensor)
-    prediction = (output > 0.5).float()
-    return prediction.item()
+    # Подготовка данных
+    X_train, X_val, y_train, y_val = preprocess_data(features, labels)
 
-# Пример использования
-input_data = [0.4546349346637726, 0.3655001223087311, 0.3462199568748474,  # Пример данных
-              0.35191357135772705, 0.348592072725296, -0.3180901110172272,  # Координаты ключевых точек
-              # ...
-              0.5178617835044861, 0.869202196598053, 0.4039325416088104]
+    # Создание модели
+    input_size = X_train.shape[1]
+    model = MLPModel(input_size)
 
-prediction = predict(input_data)
-print(f"Prediction: {'Correct' if prediction == 1 else 'Incorrect'}")
+    # Определение функции потерь и оптимизатора
+    criterion = nn.BCELoss()  # Для бинарной классификации
+    optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+    # Обучение модели
+    train_model(model, criterion, optimizer, X_train, y_train, X_val, y_val, epochs=50, batch_size=32)
+
+    # Сохранение модели
+    torch.save(model.state_dict(), 'squat_model.pth')
+    print("Модель сохранена в файл squat_model.pth")
+
+if __name__ == "__main__":
+    main()
