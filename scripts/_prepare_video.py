@@ -7,14 +7,6 @@ processed_dir = "dataset/processed/"
 
 print(f"Текущая рабочая директория: {os.getcwd()}")
 
-# проверка существования директорий
-if not os.path.exists(raw_dir):
-  print(f"Директория {raw_dir} не существует.")
-elif not os.path.exists(processed_dir):
-  print(f"Директория {processed_dir} не существует.")
-else:
-  print(f"Начинаем обработку директории {raw_dir}.")
-
 # Проходим по всем директориям и файлам в base_dir
 for root, dirs, files in os.walk(raw_dir):
   for file in files:
