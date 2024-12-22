@@ -32,7 +32,7 @@ def test_model():
     model.eval()  # Устанавливаем модель в режим тестирования
 
     # Загрузка тестовых данных из JSON
-    json_file_path = 'pose_data.json'  # Путь к вашему JSON файлу
+    json_file_path = 'src/pose_data.json'  # Путь к вашему JSON файлу
     test_data = load_test_data(json_file_path)
 
     # Преобразуем данные в тензор для PyTorch
