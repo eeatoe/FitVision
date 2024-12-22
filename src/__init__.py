@@ -31,7 +31,7 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
     # Обучение модели
-    train_model(model, criterion, optimizer, X_train, y_train, X_val, y_val, epochs=50, batch_size=32)
+    train_model(model, criterion, optimizer, X_train, y_train, X_val, y_val, epochs=10, batch_size=32)
 
     # Сохранение модели
     torch.save(model.state_dict(), 'squat_model.pth')
