@@ -3,10 +3,25 @@ import os
 import mediapipe as mp
 import json
 
-
 def pose_analyzer(video_path, label):
     cap = cv2.VideoCapture(video_path)
     pose = mp.solutions.pose.Pose(model_complexity=1)  # 0 - быстрый, 1 - умеренный, 2 - медленный
+
+    # Точки, которые будут анализироваться
+    included_landmarks = {
+        mp.solutions.pose.PoseLandmark.LEFT_SHOULDER,
+        mp.solutions.pose.PoseLandmark.RIGHT_SHOULDER,
+        mp.solutions.pose.PoseLandmark.LEFT_HIP,
+        mp.solutions.pose.PoseLandmark.RIGHT_HIP,
+        mp.solutions.pose.PoseLandmark.LEFT_KNEE,
+        mp.solutions.pose.PoseLandmark.RIGHT_KNEE,
+        mp.solutions.pose.PoseLandmark.LEFT_ANKLE,
+        mp.solutions.pose.PoseLandmark.RIGHT_ANKLE,
+        mp.solutions.pose.PoseLandmark.LEFT_HEEL,
+        mp.solutions.pose.PoseLandmark.RIGHT_HEEL,
+        mp.solutions.pose.PoseLandmark.LEFT_FOOT_INDEX,
+        mp.solutions.pose.PoseLandmark.RIGHT_FOOT_INDEX,
+    }
 
     results_data = []
     frame_number = 0
@@ -35,7 +50,7 @@ def pose_analyzer(video_path, label):
                         "visibility": landmark.visibility,
                     }
                     for landmark_name, landmark in zip(mp.solutions.pose.PoseLandmark, results.pose_landmarks.landmark)
-                    if landmark_name.value > 10  # Исключаем координаты лица
+                    if landmark_name in included_landmarks  # Фильтруем только нужные точки
                 },
                 "label": label  # Добавляем метку
             }
@@ -47,11 +62,9 @@ def pose_analyzer(video_path, label):
     pose.close()
     return results_data
 
-
 def save_json(data, output_path):
     with open(output_path, "w") as json_file:
         json.dump(data, json_file, indent=4)
-
 
 # Главная логика
 def process_videos(processed_dir, poses_dir):
@@ -78,7 +91,6 @@ def process_videos(processed_dir, poses_dir):
                 output_json_path = os.path.join(poses_subdir, f"{file[:-4]}.json")
                 save_json(landmarks, output_json_path)
                 print(f"Результаты сохранены: {output_json_path}")
-
 
 # Инициализация путей
 processed_dir = "dataset/processed/"
