@@ -20,7 +20,7 @@ class MLPModel(nn.Module):
     def forward(self, x):
         return self.model(x)
 
-def train_model(model, criterion, optimizer, X_train, y_train, X_val, y_val, epochs=50, batch_size=32):
+def train_model(model, criterion, optimizer, X_train, y_train, X_val, y_val, epochs=10, batch_size=32):
     train_dataset = torch.utils.data.TensorDataset(X_train, y_train)
     val_dataset = torch.utils.data.TensorDataset(X_val, y_val)
 

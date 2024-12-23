@@ -12,6 +12,7 @@ def load_data(json_file_path):
         keypoints = entry['keypoints']
         features.append([keypoints[point][axis] for point in keypoints for axis in ['x', 'y', 'z']])
         labels.append(entry['label'])
+    print()
     return np.array(features), np.array(labels)
 
 def preprocess_data(features, labels):
