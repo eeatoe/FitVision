@@ -3,22 +3,36 @@ from model import MLPModel  # Импорт вашей модели
 import numpy as np
 import json
 
-# Функция для загрузки тестовых данных из JSON
+# Функция для загрузки всех тестовых данных из JSON
 def load_test_data(json_file_path):
     with open(json_file_path, 'r') as file:
         data = json.load(file)
     
-    test_entry = data[0]  # Берём первую запись
-    keypoints = test_entry['keypoints']
+    # Создаём массив для всех фреймов
+    all_test_data = []
     
-    # Извлекаем координаты x, y, z для первых 12 точек
-    test_data = []
-    for point in list(keypoints.keys())[:12]:  # Только первые 12 точки
-        for axis in ['x', 'y', 'z']:  # Все три координаты
-            test_data.append(keypoints[point][axis])
+    # Обрабатываем каждую запись (фрейм)
+    for test_entry in data:
+        keypoints = test_entry['keypoints']
+        
+        # Проверяем и исключаем метку, если она есть
+        if 'label' in test_entry:
+            print("ВНИМАНИЕ: Найдена метка 'label' в данных. Она будет игнорирована.")
+            del test_entry['label']  # Удаляем метку из текущей записи
+        
+        # Извлекаем координаты x, y, z для первых 12 точек
+        test_data = []
+        for point in list(keypoints.keys())[:12]:  # Только первые 12 точки
+            for axis in ['x', 'y', 'z']:  # Все три координаты
+                test_data.append(keypoints[point][axis])
+        
+        # Добавляем обработанную запись в массив
+        all_test_data.append(test_data)
     
-    print(f"Количество признаков: {len(test_data)}")  # Должно быть 36
-    return np.array([test_data])  # Возвращаем данные в формате (1, 36)
+    print(f"Общее количество записей: {len(all_test_data)}")
+    print(f"Количество признаков в каждой записи: {len(all_test_data[0])}")  # Должно быть 36
+
+    return np.array(all_test_data)  # Возвращаем массив данных в формате (N, 36), где N — количество записей
 
 # Функция для тестирования модели
 def test_model():
@@ -32,7 +46,7 @@ def test_model():
     model.eval()  # Устанавливаем модель в режим тестирования
 
     # Загрузка тестовых данных из JSON
-    json_file_path = 'src/pose_data.json'  # Путь к вашему JSON файлу
+    json_file_path = 'dataset/testData/IMG_6090_segment_0.json'  # Путь к вашему JSON файлу
     test_data = load_test_data(json_file_path)
 
     # Преобразуем данные в тензор для PyTorch
@@ -42,8 +56,15 @@ def test_model():
     with torch.no_grad():  # Отключаем вычисление градиентов для теста
         predictions = model(test_data)
     
-    # Печатаем результат
-    print("Предсказания:", predictions.detach().numpy())  # Выводим результат
+    # Проверка диапазона предсказаний
+    predictions_np = predictions.detach().numpy()
+    if np.any(predictions_np < 0) or np.any(predictions_np > 1):
+        print("ВНИМАНИЕ: Предсказания вне диапазона [0, 1]. Проверьте активацию на выходном слое.")
+    
+    # Печатаем результаты
+    print("Предсказания для всех записей:")
+    for i, pred in enumerate(predictions_np):
+        print(f"Запись {i + 1}: {pred}")
 
 if __name__ == "__main__":
     test_model()
