@@ -2,12 +2,6 @@ import os
 import json
 
 def merge_json_files(input_dir, output_file):
-    """
-    Объединяет все JSON-файлы из указанной директории в один JSON-файл.
-
-    :параметр input_dir: Путь к директории, содержащей JSON-файлы.
-    :параметр output_file: Путь к результирующему JSON-файлу.
-    """
     merged_data = []
 
     # Обход всех файлов в директории
@@ -23,12 +17,19 @@ def merge_json_files(input_dir, output_file):
                         # Добавляем содержимое файла без дополнительных данных
                         merged_data.extend(data)  # Распаковываем содержимое
                 except Exception as e:
-                    print(f"Ошибка чтения файла {file_path}: {e}")
+                    print(f"Error reading file {file_path}: {e}")
 
     # Сохранение объединённых данных в выходной файл
     try:
         with open(output_file, 'w') as f:
             json.dump(merged_data, f, indent=4)
-        print(f"Объединенные данные сохранены в файл: {output_file}")
+        print(f"The merged data is saved to a file: {output_file}")
     except Exception as e:
-        print(f"Ошибка записи файла {output_file}: {e}")
+        print(f"Error writing file {output_file}: {e}")
+
+"""
+Объединяет все JSON-файлы из указанной директории в один JSON-файл.
+
+:параметр input_dir: Путь к директории, содержащей JSON-файлы.
+:параметр output_file: Путь к результирующему JSON-файлу.
+"""

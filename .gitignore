@@ -1,11 +1,16 @@
+# Настройки Visual Studio Code
+.vscode/
+
 # Папка с локальным окружением
 venv/
 
 # Папка с обученными моделаям (может быть в будующем кинем в репозиторий)
-outputs/
+outputs/*
 
 # Базы данных
-dataset/poses
-dataset/processed
-dataset/raw
-dataset/metadata.csv
+data/poses/*
+data/processed/*
+data/raw/*
+data/testData
+
+data/metadata.csv
