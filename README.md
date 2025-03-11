@@ -1,8 +1,13 @@
-## Структура проекта
+# Project structure
+
 ```
 .
 ├── dataset
 │   ├── metadata.csv
+│   ├── poses
+│   │   ├── 20241122_122513.json
+│   │   ├── 20241122_122525.json
+│   │   └── ...
 │   ├── processed
 │   │   └── correct
 │   ├── raw
@@ -20,8 +25,6 @@
 │   │           ├── 20241122_124052.mp4
 │   │           └── ...
 │   └── README.md
-├── directory_structure.txt
-├── dit_structure.txt
 ├── outputs
 │   └── models
 │       └── predictions
@@ -41,104 +44,59 @@
 └── venv
 ```
 
-Структуру проекта нужно периодически обновлять, чтобы у нас была хорошая документация и чтобы мы не могли запутаться в ней. Такую структуру можно легко получить, через инструмент `tree` (`sudo apt install tree`). Команда `tree` выведет в терминал всю директорию, чтобы записать ее в `.txt` файл можно использовать такую команду: `tree > directory_structure.txt`.
+### Primary folders and files
 
-## 1. Описание ключевых папок и файлов
+- **`dataset/`**: Directory containing data, divided into `raw` (raw data) and `processed` (processed data) folders. Inside the `raw` folder, there may be subdirectories for correct and incorrect data. Each subdirectory may contain video files, such as training sessions or examples of incorrect exercise execution.
+- **`outputs/`**: Directory for output generated after model processing. It includes folders for models, predictions, and logs.
+- **`scripts/`**: Directory for scripts that handle data preparation tasks. All scripts are imported into the `_prepare_video.py` file and used further in the process.
+- **`src/`**: Source code organized into several folders for different parts of the project, such as model training, inference execution, and utility functions.
+- **`venv/`**: Directory for the virtual environment used to isolate the dependencies of the Python project.
 
-- **`dataset/`**: Папка с данными, разделенная на `raw` (необработанные данные) и `processed` (обработанные данные). Внутри `raw` могут быть подкаталоги для правильных и неправильных данных. Каждый подкаталог может содержать видеофайлы, например, с тренировками или ошибками выполнения упражнений.
-- **`outputs/`**: Папка для вывода, после работы модели. Включает папки для моделей, предсказаний и логов.
-- **`scripts/`**: Папка для скриптов, которые выполняют задачи подготовки данных. Все скрипты импортируются в файл `_prepare_video.py` и дальше используются.
-- **`src/`**: Исходный код, разбитый на несколько папок для разных частей проекта, таких как обучение модели, выполнение инференса, а также вспомогательные функции.
-- **`venv/`**: Папка для виртуальной среды, которая используется для изоляции зависимостей Python-проектов.
-- **`README.md`** и **`dataset/README.md`**: Документация для общего описания проекта и подробного объяснения структуры данных.
+# Requirements
 
----
-## 2. Подготовка к работе:
-#### 1. Установите **`Python`** и **`pip`**
+- Python
+- pip
 
-Убедитесь, что у вас установлен Python и пакетный менеджер pip. Вы можете проверить это, выполнив следующие команды в терминале:
+### Libraries Used
+
+`os`, `moviepy`, `MediaPipe`, `cv2`
+
+# Preparation for work and launch
+### 1. Installation **`Python`** and **`pip`**
+
+Make sure that Python and the pip package manager are installed. You can check this by running the following commands in your terminal:
+
 ```bash
 python --version
 pip --version
 ```
-**`Если Python не установлен`**, вы можете скачать его с официального сайта Python (https://www.python.org/downloads/). Установка Python обычно включает pip (после установки проверьте есть ли pip, если нет установите его командой:
+
+If Python is not installed, you can download it from [the official Python website]([https://www.python.org/downloads/](https://www.python.org/downloads/)). Pip should be installed automatically with Python. After installation, check if pip is available. If not, install it using the following command:
+
 ```bash
-python -m ensurepip --upgrade)
+python -m ensurepip --upgrade
 ```
 
-#### 2. Создайте **`виртуальное окружение`** 
-Создание виртуального окружения позволяет изолировать зависимости вашего проекта от других проектов и системных библиотек (подробности использования смотреть в 4 разделе `Виртуальная среда Python`). Для этого выполните следующие команды:
+### 2. Installing a virtual environment
+
+Creating a virtual environment isolates your project's dependencies from others and system libraries. To create the environment, run the following command in the project root:
+
 ```bash
-cd путь/к/вашему/проекту
 python -m venv venv
 ```
-#### 3. **`Активируйте виртуальное окружение**`
-После создания виртуального окружения его нужно активировать:
 
-На **`Windows`**:
+Next, activate the environment:
+
 ```bash
-venv\Scripts\activate
-```
-На **`macOS и Linux`**:
-```bash
+# On Linux or macOS
 source venv/bin/activate
+
+# On Windows
+.\venv\Scripts\activate
 ```
-#### 4. **`Установите зависимости из requirements.txt`**
-Теперь вы можете установить все зависимости с помощью следующей команды:
+
+Finally, install all dependencies with:
+
 ```bash
 pip install -r requirements.txt
 ```
-#### 5. **`Проверьте установленные зависимости`**
-```bash
-pip list
-```
-
-## 3. Используемые библиотеки и их назначение
-
-### 1) `os` —
-### 2) `moviepy` —
-
-### 3) cv2
-
-`cv2` — это модуль Python из библиотеки **`OpenCV` (Open Source Computer Vision)**. `OpenCV` — одна из самых популярных библиотек для обработки изображений и компьютерного зрения. Она поддерживает работу с изображениями и видео, включая такие задачи, как распознавание объектов, обработка видео, фильтрация изображений, работа с камерами и многое другое.
-
-Этот  модуль понадобился нам, так как `MediaPipe` не имеет встроенных функций визуализации, таких как отображение изображения или видео. `OpenCV` используется для захвата данных с камеры, обработки изображений (например, изменения формата цвета) и отображения результатов.
-
-### 4) mediapipe
-
-`**MediaPipe**` — это мощная библиотека от Google, которая предоставляет готовые решения для анализа и обработки видео, изображения и данных в реальном времени, таких как отслеживание поз, жестов, лиц, рук и объектов.
-
----
-
-## 4. Подробности
-
-### venv (виртуальная среда Python)
-
-`venv` (виртуальная среда Python) позволяет изолировать зависимости проекта от глобальной среды Python. Это полезно, чтобы избегать конфликтов между различными версиями библиотек в разных проектах.
-
-Для создания виртуальной среды нужно выполнить команду в терминале (`myenv` — имя виртуальной среды):
-
-```bash
-python -m venv myenv
-```
-
-Чтобы удалить виртуальную среду, нужно просто стереть папку `myenv`.
-
-Активация виртуальной среды (нужно, чтобы, например, установить какую-нибудь библиотеку):
-
-```bash
-source myenv/bin/activate # На Linux
-```
-
-Если понадобится деактивировать виртуальную среду, то нужно прописать такую команду: `deactivate`.
-
-> [!Note]
-> Если использовался плагин `code runner`, то он поумолчания пытается открыть файл с помощью интерпретатора в директории `path`, тоесть с помощью глобальной среды выполнения. Но сегодня везде стараются изалировать проекты делая списки плагинов, их версий и зависимостей, чтобы небыло конфликтов в разных проектах.
->
-> Чтобы указать Code Runner использовать конкретную среду:
->
-> 1. Откройте настройки VS Code
-> 2. В строке поиска введите **Code Runner Executor Map**.
-> 3. Выбрать из `User` и `Workspace` второе, так как мы не хотим, чтобы вообще везде использовалась эта среда выполнения.
-> 4. Найдите настройку `code-runner.executorMap` и нажмите значок редактирования (`Edit in settings.json`).
-> 5. В обьекте `"code-runner.executorMap"` нужно найти `python` и вписать вместо значения поумолчанию путь к `python`. Он будет примерно такой: `путь до проекта/venv/bin/python`.

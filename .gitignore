@@ -1,11 +1,17 @@
-# Папка с локальным окружением
+# Local environment
 venv/
 
-# Папка с обученными моделаям (может быть в будующем кинем в репозиторий)
+# Trained models
 outputs/
 
-# Базы данных
+# Datasets
 dataset/poses
 dataset/processed
 dataset/raw
 dataset/metadata.csv
+
+# Visual Studio Code config
+/.vscode/*
+
+# Obsidian temps file
+/.obsidian/*
